@@ -1672,3 +1672,7 @@ body.offcanvas .colorlib-nav-toggle {
         height: auto; /* This helps in mobile view */
     }
 }
+body.menu-open {
+  overflow: hidden;
+}
+
