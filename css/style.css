@@ -1664,15 +1664,4 @@ body.offcanvas .colorlib-nav-toggle {
   color: #0A66C2;
 }
 
-.js-fullheight {
-    height: 100vh;
-}
-@media screen and (max-width: 768px) {
-    .js-fullheight {
-        height: auto; /* This helps in mobile view */
-    }
-}
-body.menu-open {
-  overflow: hidden;
-}
 
