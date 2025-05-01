@@ -1857,3 +1857,12 @@ button.close {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
+.js-fullheight {
+    height: 100vh;
+}
+@media screen and (max-width: 768px) {
+    .js-fullheight {
+        height: auto; /* This helps in mobile view */
+    }
+}
+
