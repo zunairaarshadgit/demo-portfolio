@@ -22,10 +22,3 @@ $(document).ready(function () {
     });
 });
 
-// Toggle body class when nav is open/closed
-const toggle = document.querySelector('.js-colorlib-nav-toggle');
-const navbar = document.getElementById('navbar');
-
-toggle.addEventListener('click', function () {
-  document.body.classList.toggle('menu-open');
-});
