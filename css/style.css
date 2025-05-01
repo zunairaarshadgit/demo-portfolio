@@ -1663,3 +1663,12 @@ body.offcanvas .colorlib-nav-toggle {
 .contact-icon i.fa-linkedin:hover {
   color: #0A66C2;
 }
+
+.js-fullheight {
+    height: 100vh;
+}
+@media screen and (max-width: 768px) {
+    .js-fullheight {
+        height: auto; /* This helps in mobile view */
+    }
+}
