@@ -29,6 +29,20 @@
 	<link href="https://fonts.googleapis.com/css?family=Quicksand:300,400,500,700" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/css?family=Playfair+Display:400,400i,700" rel="stylesheet">
 
+
+	<!-- Toastr CSS -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
+
+
+	<script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+	<script>
+		(function () {
+			emailjs.init("yvCyB3mbZUAvVpBU5"); // <-- Replace with your actual public key
+		})();
+	</script>
+
 	<!-- Animate.css -->
 	<link rel="stylesheet" href="css/animate.css">
 	<!-- Icomoon Icon Fonts-->
@@ -62,10 +76,8 @@
 <body>
 	<div id="colorlib-page">
 		<div class="container-wrap">
-			<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" 
-   data-bs-toggle="collapse" 
-   data-bs-target="#navbar"
-   aria-expanded="false" aria-controls="navbar"><i></i></a>
+			<a href="#" class="js-colorlib-nav-toggle colorlib-nav-toggle" data-bs-toggle="collapse"
+				data-bs-target="#navbar" aria-expanded="false" aria-controls="navbar"><i></i></a>
 
 			<aside id="colorlib-aside" role="complementary" class="border js-fullheight">
 				<div class="text-center">
@@ -90,16 +102,6 @@
 				</nav>
 
 				<div class="colorlib-footer">
-					<p><small>&copy;
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;
-							<script>document.write(new Date().getFullYear());</script> All rights reserved | This
-							template is made with <i class="icon-heart" aria-hidden="true"></i> by <a
-								href="https://colorlib.com/" target="_blank">Colorlib</a>
-							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							</span> <span>Demo Images: <a href="https://unsplash.com/"
-									target="_blank">Unsplash.com</a></span>
-						</small></p>
 					<div class="contact-icon">
 						<i class="fa-brands fa-facebook"></i>
 						<i class="fa-brands fa-instagram"></i>
@@ -114,7 +116,7 @@
 				<section id="colorlib-hero" class="js-fullheight" data-section="home">
 					<div class="flexslider js-fullheight">
 						<ul class="slides">
-							<li style="background-image: url(images/img_bg_1.jpg);">
+							<li style="background-image: url(images/img_bg_3.jpg);">
 								<div class="overlay"></div>
 								<div class="container-fluid">
 									<div class="row">
@@ -202,14 +204,14 @@
 										</div>
 									</div>
 								</div>
-								<div class="row">
+								<!-- <div class="row">
 									<div class="col-md-12 animate-box" data-animate-effect="fadeInLeft">
 										<div class="hire">
 											<h2>I am happy to know you <br>that 300+ projects done sucessfully!</h2>
 											<a href="mailto:" class="btn-hire">Hire me</a>
 										</div>
 									</div>
-								</div>
+								</div> -->
 							</div>
 						</div>
 					</div>
@@ -795,7 +797,8 @@
 									</div>
 									<div class="colorlib-text">
 										<p><a href="#"><span class="__cf_email__"
-													data-cfemail="7a13141c153a1e15171b131454191517">[email&#160;protected]</span></a>
+													data-cfemail="7a13141c153a1e15171b131454191517">your
+													email</span></a>
 										</p>
 									</div>
 								</div>
@@ -806,7 +809,7 @@
 										<i class="icon-map"></i>
 									</div>
 									<div class="colorlib-text">
-										<p>198 West 21th Street, Suite 721 New York NY 10016</p>
+										<p>your address</p>
 									</div>
 								</div>
 
@@ -816,7 +819,7 @@
 										<i class="icon-phone"></i>
 									</div>
 									<div class="colorlib-text">
-										<p><a href="tel://">+123 456 7890</a></p>
+										<p><a href="tel://">your phone</a></p>
 									</div>
 								</div>
 							</div>
@@ -824,19 +827,24 @@
 								<div class="row">
 									<div class="col-md-10 col-md-offset-1 col-md-pull-1 animate-box"
 										data-animate-effect="fadeInRight">
-										<form action="#">
+										<form id="contact-form">
 											<div class="form-group">
-												<input type="text" class="form-control" placeholder="Name">
+												<input type="text" name="name" class="form-control" placeholder="Name"
+													required>
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" placeholder="Email">
+												<input type="email" name="user_email" class="form-control"
+													placeholder="Email" required>
+												<input type="hidden" name="email" class="form-control"
+													placeholder="Email" required value="zehratuljannat@gmail.com">
 											</div>
 											<div class="form-group">
-												<input type="text" class="form-control" placeholder="Subject">
+												<input type="text" name="subject" class="form-control"
+													placeholder="Subject" required>
 											</div>
 											<div class="form-group">
-												<textarea name="" id="message" cols="30" rows="7" class="form-control"
-													placeholder="Message"></textarea>
+												<textarea name="message" cols="30" rows="7" class="form-control"
+													placeholder="Message" required></textarea>
 											</div>
 											<div class="form-group">
 												<input type="submit" class="btn btn-primary btn-send-message"
@@ -867,6 +875,27 @@
 		</div><!-- end:container-wrap -->
 	</div><!-- end:colorlib-page -->
 
+
+	<script>
+		document.getElementById("contact-form").addEventListener("submit", function (e) {
+			e.preventDefault();
+
+			emailjs.sendForm('service_smfcuic', 'template_4j86rdo', this)
+				.then(() => {
+					toastr.success("Message sent successfully!");
+					this.reset(); // clear the form
+				})
+				.catch((error) => {
+					toastr.error("Failed to send message. Please try again.");
+					console.error("Error sending message:", error);
+				});
+		});
+
+	</script>
+
+
+
+
 	<!-- jQuery -->
 	<script data-cfasync="false" src="../../cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
 	<script src="js/jquery.min.js"></script>
@@ -885,6 +914,9 @@
 
 	<script src="js/script.js"></script>
 
+
+	<!-- Toastr JS -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 
 	<!-- MAIN JS -->
 	<script src="js/main.js"></script>
@@ -905,7 +937,5 @@
 		data-cf-beacon='{"rayId":"938b62e41eb4a07f","version":"2025.4.0-1-g37f21b1","serverTiming":{"name":{"cfExtPri":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}},"token":"cd0b4b3a733644fc843ef0b185f98241","b":1}'
 		crossorigin="anonymous"></script>
 </body>
-
-<!-- Mirrored from preview.colorlib.com/theme/Tahir Ali/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 01 May 2025 01:08:20 GMT -->
 
 </html>
